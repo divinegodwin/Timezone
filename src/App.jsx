@@ -17,8 +17,8 @@ function App() {
   const [continent, setContinent] = useState("");
   const [error, setError] = useState('')
   const [countryName, setCountryName] = useState('')
-  const [time, setTime] = useState('')
-
+  let [time, setTime] = useState('')
+  
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
   };
@@ -38,7 +38,10 @@ function App() {
      .then(data=>{
       console.log(data)
       setCountryName(data.timezone)
-      setTime(data.time)
+      const dateTimeString = data.datetime;
+      const dateTime = new Date(dateTimeString);
+      const time = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      setTime(time)
      })
      .catch(error =>console.log(error))
    }
@@ -118,7 +121,7 @@ function App() {
             </div>
 
             <div>
-              <p>{time}</p>
+              <p className="text-[1.2rem] px-3">{time}</p>
             </div>
 
         </div>
