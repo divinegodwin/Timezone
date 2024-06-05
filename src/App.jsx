@@ -16,7 +16,8 @@ function App() {
   const [userInput, setUserInput] = useState("");
   const [continent, setContinent] = useState("");
   const [error, setError] = useState('')
-  const [country, setCountry] = useState('')
+  const [countryName, setCountryName] = useState('')
+  const [time, setTime] = useState('')
 
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
@@ -29,13 +30,15 @@ function App() {
   const fetchData = () =>{     
         
     if(continent && userInput){
+      setError('')
 
     fetch(`http://worldtimeapi.org/api/timezone/${continent}/${userInput}`)
 
      .then(response => response.json())
      .then(data=>{
       console.log(data)
-      setCountry()
+      setCountryName(data.timezone)
+      setTime(data.time)
      })
      .catch(error =>console.log(error))
    }
@@ -77,9 +80,10 @@ function App() {
 </div>
 
 
+
+<div className="text-[red] mt-[1rem] w-full pl-4">{error}</div>
         <div className="flex justify-center ml-3 mt-[1rem] pt-[10px] h-[60px] bg-slate-200 w-[360px] rounded-full">
 
-            <div className="text-[red]">{error}</div>
           <input
             className="w-[280px] h-[40px] p-4 outline-orange-500 rounded-full"
             onChange={handleInputChange}
@@ -109,7 +113,13 @@ function App() {
 
         <div className="bg-slate-200 w-[90%] h-[200px] rounded-lg ml-4 mt-8">
 
-            <header>{}</header>
+          <div>
+            <header className="text-center pt-4 text-[20px] font-bold">{countryName}</header>
+            </div>
+
+            <div>
+              <p>{time}</p>
+            </div>
 
         </div>
         
