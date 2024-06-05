@@ -6,7 +6,8 @@ function App() {
   let fullTime;
   const format = ["am", "pm"];
   if (minutes < 10) {
-    fullTime = `${hours}:0${minutes}${format[0]}`;
+     fullTime = date.toLocaleTimeString([], { hours: '2-digit', minutes: '2-digit' });
+
   }
   if (hours < 12) {
     fullTime = `${hours}:${minutes}${format[0]}`;
@@ -49,6 +50,7 @@ function App() {
     console.log('please select a valid location')
     setError('please input a valid loacation')
    }
+   setUserInput('')
   }
 
   return (
@@ -67,22 +69,18 @@ function App() {
           </div>
         </div>
 
-
         <div className="mt-4 ml-4">
         <label>select region:</label><br />
         <select className="text-blue-500"
         onChange={handleSelect}
         >
-          <option value='Nort America'>North America</option>
-          <option value='South America'>South America</option>
+          <option value='America'> America</option>
           <option value='Africa'>Africa</option>
           <option value='Asia'>Asia</option>
           <option value='Europe'>Europe</option>
-          <option value='artactica'>Artactica</option>
+          <option value='Australia'>Australia</option>
         </select>
 </div>
-
-
 
 <div className="text-[red] mt-[1rem] w-full pl-4">{error}</div>
         <div className="flex justify-center ml-3 mt-[1rem] pt-[10px] h-[60px] bg-slate-200 w-[360px] rounded-full">
@@ -114,14 +112,14 @@ function App() {
 
         </div>
 
-        <div className="bg-slate-200 w-[90%] h-[200px] rounded-lg ml-4 mt-8">
+        <div className="bg-slate-200 w-[90%] h-[180px] rounded-lg ml-4 mt-8">
 
           <div>
             <header className="text-center pt-4 text-[20px] font-bold">{countryName}</header>
             </div>
 
             <div>
-              <p className="text-[1.2rem] px-3">{time}</p>
+              <p className="text-[4rem] px-3 font-bold text-center text-blue-500">{time}</p>
             </div>
 
         </div>
